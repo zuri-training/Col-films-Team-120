@@ -14,7 +14,8 @@ This app was built using the Django framework
 2. [Installation](#how-to-install)
 3. [Usage](#how-to-use)
 4. [Resources](#Resources)
-5. [Contributors](#contributors)
+5. [Images](#images)
+6. [Contributors](#contributors)
 
 ## How to install
 
@@ -47,6 +48,10 @@ This app was built using the Django framework
 - [Figma Board](https://www.figma.com/file/SrpBl1g9DxXzRwSgnTJ9h6/Style-Guide?node-id=0%3A1)
 - [Figjam Board](https://www.figma.com/file/MDitz2vW5HJ1Hw9z9DmYSQ/Team-120-notes?node-id=0%3A1)
 - [Research plan](https://docs.google.com/document/d/1JeivVsSsdrnkBP0AYehKlBAZN6f1ZVOp6qz0ofOUWUc/edit?usp=sharing)
+
+## Images
+
+![Schema](./images/team120_col-films.png)
 
 ## Contributors
 
