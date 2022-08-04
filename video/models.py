@@ -10,8 +10,9 @@ class Profile(models.Model):
 
     user = models.OneToOneField(
         User, verbose_name=_("User"), on_delete=models.CASCADE)
-    school = models.CharField(_("School"), max_length=50)
-    verified = models.BooleanField(_("Verified"))
+    school = models.CharField(
+        _("School"), max_length=50, null=True, blank=True)
+    verified = models.BooleanField(_("Verified"), default=False, blank=True)
 
     def __str__(self):
         return "{}'s Profile".format(self.user.username)
