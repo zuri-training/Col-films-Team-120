@@ -1,14 +1,24 @@
 from dataclasses import fields
+from operator import imod
 from pyexpat import model
 from rest_framework import serializers
 from video.models import Category, Comment, Like, Profile, Video
-from django.contrib.auth.models import User
+from members.models import Member
+from rest_framework import status
 
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
         fields = "__all__"
+
+    def create(self, validated_data):
+        categories = validated_data.pop("categories")
+        published = validated_data.pop("published")
+
+        instance = self.Meta.model(**validated_data)
+        instance.categories = [int(x) for x in categories.split(",")]
+        instance.published = bool(int(published))
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -19,8 +29,18 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ("username", "first_name", "last_name", "email", "password")
+        model = Member
+        fields = ("first_name", "last_name",
+                  "school", "email", "password")
+
+    def validate_email(self, email):
+        """
+        Check the email to ensure a valid student email is passed
+        """
+        if ".edu" not in email.split("@")[1]:
+            raise serializers.ValidationError(
+                "Email must be a school email", code=status.HTTP_400_BAD_REQUEST)
+        return email
 
     def create(self, validated_data):
         password = validated_data.pop("password", None)

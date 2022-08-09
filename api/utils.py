@@ -3,7 +3,7 @@ from django.conf import settings
 from rest_framework.exceptions import AuthenticationFailed
 
 
-def authenticate_user(token):
+def verify_token(token):
     '''
     This function authenticates user with jwt token
     '''
@@ -28,7 +28,7 @@ def is_authenticated(request):
 
     jwt_token = request.COOKIES.get("user-token")
 
-    payload = authenticate_user(jwt_token)
+    payload = verify_token(jwt_token)
 
     if payload:
         return payload["id"]
