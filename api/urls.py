@@ -15,7 +15,7 @@ urlpatterns = [
     # VIDEO ENDPOINTS
     path('', VideoListView.as_view()),
     path('video/', VideoView.as_view()),
-    path('video/<int:video_id>', VideoView.as_view()),
+    path('video/<slug:video_slug>', VideoView.as_view()),
 
     # USER ENDPOINTS
     # path('login/', LoginView.as_view()),

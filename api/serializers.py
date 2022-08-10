@@ -1,30 +1,32 @@
-from dataclasses import fields
-from operator import imod
-from pyexpat import model
 from rest_framework import serializers
 from video.models import Category, Comment, Like, Profile, Video
 from members.models import Member
 from rest_framework import status
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ("title",)
+
+
 class VideoSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField(read_only=True)
+    video_file = serializers.SerializerMethodField('get_video')
+    likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    def get_video(self, instance):
+        return "http://127.0.0.1:8000/media/{}".format(instance.video_file)
+
     class Meta:
         model = Video
         fields = "__all__"
 
     def create(self, validated_data):
-        categories = validated_data.pop("categories")
         published = validated_data.pop("published")
 
         instance = self.Meta.model(**validated_data)
-        instance.categories = [int(x) for x in categories.split(",")]
         instance.published = bool(int(published))
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):

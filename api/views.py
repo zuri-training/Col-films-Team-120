@@ -11,7 +11,7 @@ from django.conf import settings
 # Custom imports
 from .serializers import CategorySerializer, CommentSerializer, LikeSerializer, ProfileSerializer, UserSerializer, VideoSerializer
 from video.models import Category, Comment, Like, Profile, Video
-from .utils import verify_token, is_authenticated
+from moviepy.editor import *
 
 
 class VideoListView(generics.ListAPIView):
@@ -35,20 +35,20 @@ class VideoView(APIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def get_object(self, video_id):
+    def get_object(self, video_slug):
         '''
             Get a single video instance by passing the video id
         '''
         try:
-            return Video.objects.get(id=video_id)
+            return Video.objects.get(slug=video_slug)
         except Video.DoesNotExist:
             raise Http404
 
-    def get(self, request, video_id):
+    def get(self, request, video_slug):
         '''
             REturn a single video instance to the api response
         '''
-        video = self.get_object(video_id)
+        video = self.get_object(video_slug)
         serializer = VideoSerializer(video)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -71,10 +71,13 @@ class VideoView(APIView):
             "author": request.user.id,
             **request.data
         }
-
         serializer = VideoSerializer(data=video_data)
 
         if serializer.is_valid(raise_exception=True):
+            if(VideoFileClip(request.data.video_file).duration > 900):
+                return Response({"detail": "Video must not be loner than 15 minutes"},
+                                status=status.HTTP_400_BAD_REQUEST)
+
             serializer.save()
             return Response({"detail": "Video Created"}, status=status.HTTP_201_CREATED)
 
@@ -295,9 +298,9 @@ class LikeView(APIView):
         '''
         # user = is_authenticated(request)
         # if user:
-        if self.liked_user(video_id=request.data["video"], user_id=user):
+        if self.liked_user(video_id=request.data["video"], user_id=request.user):
             like_data = {
-                "user": user,
+                "user": request.user,
                 **request.data
             }
 
