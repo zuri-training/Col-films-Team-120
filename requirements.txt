@@ -3,3 +3,6 @@ Django
 pytz
 sqlparse
 psycopg2-binary
+python-dotenv
+djangorestframework
+djangorestframework-simplejwt
