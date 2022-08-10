@@ -9,3 +9,4 @@
 | Issue/ Task  | Pull Request / Issues / Commit                                                      |
 | ------------ | ----------------------------------------------------------------------------------- |
 | Profile Page | [Profile Page Issue](https://github.com/zuri-training/Col-films-Team-120/issues/20) |
+| Upload Page  | [Upload Page Issue](https://github.com/zuri-training/Col-films-Team-120/issues/7)   |
