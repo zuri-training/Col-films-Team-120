@@ -4,11 +4,9 @@
 
 ## Contributions
 
-| Issue/ Task     | Pull Request / Issues / Commit                                          |
-| --------------- | ----------------------------------------------------------------------- |
-| HomePage        | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
-| LandingPage     | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
-| SignUp          | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
-| Login           | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
-| Forgot Password | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
-| Verification    | [Merged Pull Request](https://github.com/zuri-training/AuthWiki_Team9/) |
+[Figma Link](<https://www.figma.com/file/2JmfyXDioi6yalyEUThkb4/Team120_col-films-(Copy)?node-id=594%3A4333>)
+
+| Issue/ Task | Pull Request / Issues / Commit                                                     |
+| ----------- | ---------------------------------------------------------------------------------- |
+| HomePage    | [Homepage Issue](https://github.com/zuri-training/Col-films-Team-120/issues/6)     |
+| LandingPage | [Landing Page Issue](https://github.com/zuri-training/Col-films-Team-120/issues/5) |
