@@ -1,6 +1,6 @@
-# Anyiam David
+# Ogieleguea Hillary
 
-##### Fullstact / Contributor: Full Time
+##### Fullstack Development / Assistant Team Lead: Full Time
 
 ## Contributions
 
