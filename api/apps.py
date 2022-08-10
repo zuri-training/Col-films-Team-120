@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CollywoodConfig(AppConfig):
+class ApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'collywood'
+    name = 'api'
