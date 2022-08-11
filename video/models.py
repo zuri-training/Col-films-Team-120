@@ -64,6 +64,9 @@ class Video(models.Model):
         self.slug = slugify(self.title)
         super(Video, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return "/videos/{}".format(self.slug)
+
 
 class Like(models.Model):
     # Like and dislike
@@ -76,8 +79,7 @@ class Like(models.Model):
 
     def __str__(self):
         if self.liked:
-            return "{} liked {}".format(self.user.username, self.video.title)
-        return "{} disliked {}".format(self.user.username, self.video.title)
+            return self.user.id
 
 
 class Comment(models.Model):

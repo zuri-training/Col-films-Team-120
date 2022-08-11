@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="w-screen flex justify-center items-center min-h-screen background">
+    <main class="md:w-2/5 bg-light h-full p-8 rounded-md z-10">
+        <h2 class="text-center p-4 text-primary font-bold text-3xl">Welcome Back</h2>
+        <form method="post" class="w-full flex flex-col gap-5">
+            {% csrf_token %}
+            <div class="w-full">
+
+                <label for=" id_username">Student Email</label>
+                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username"
+                    maxlength="254" required id="id_username" class="w-full block border p-2 rounded-md">
+            </div>
+            <div class="w-full">
+
+                <label for="id_password">Password</label>
+                <input type="password" name="password" autocomplete="current-password" required id="id_password"
+                    class="w-full block border p-2 rounded-md">
+                {% comment %} {{ form.as_p }} {% endcomment %}
+            </div>
+            <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Log In</button>
+        </form>
+    </main>
+    <div class="absolute top-0 bg-black opacity-50 w-full h-full"></div>
+</div>
+{% endblock content %}

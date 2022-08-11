@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div
+    class="fixed z-50 top-0 w-screen bg-light flex justify-between py-2 pr-10 pl-28 items-center border border-2 shadow-sm">
+    <div class="text-primary fixed left-0 p-6"><i class="fa fa-th-large fa-3x " aria-hidden="true"></i></div>
+    <div>
+        <img src="{%static 'logo.png' %}" alt="collywood" />
+    </div>
+    <nav class="flex gap-5 text-primary">
+        <a href="{% url 'landingpage' %}">Home</a>
+        <a href="#about-us">About</a>
+        <a href="#trending">Trending</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+    <div>
+        {% if request.user.is_authenticated %}
+        <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+        {% else %}
+        <div class="flex gap-5 items-center">
+            <a href="{%url 'login' %}" class="text-primary">Login</a>
+            <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<main class="pt-20">
+    <section class="min-h-screen grid grid-cols-2 relative p-2 relative items-center overflow-hidden">
+        <div class="p-4 flex flex-col gap-5">
+            <h1 class="text-7xl font-bold ">Discover the buzz among <span class="text-accent">College Students</span>
+            </h1>
+            <p>Upload, Interact and Watch college students display their true talents on Collywood</p>
+            <a href="{% url 'homepage' %}" class="px-6 py-2 bg-accent rounded-sm text-light w-fit">Start
+                Watching</a>
+        </div>
+        <div class="z-10">
+            <img src="{% static 'images/landingpage.png' %}" alt="welcome to collywood" />
+        </div>
+        <div
+            class="h-[2000px] w-64 absolute -z-[10] bg-box opacity-10 rotate-[37.46deg] absolute -top-[50%] left-[20%]">
+        </div>
+        <div
+            class="h-[2000px] w-64 absolute -z-[10] bg-box opacity-10 rotate-[37.46deg] absolute -top-[50%] left-[37%]">
+        </div>
+    </section>
+    <section class="py-36 bg-[#CFDAE9] opacity-100 relative overflow-hidden" id="about-us">
+        <div class="grid grid-cols-7 m-2 p-4 z-20">
+            <div class="col-span-4 z-20">
+                <img src="{% static 'images/about-us.png' %}" alt="about collywood" />
+            </div>
+            <div class="col-span-3 flex justify-center gap-5 flex-col  z-20">
+                <h2 class="font-bold text-3xl text-primary text-center">About Us</h2>
+                <p class="text-center">Collywood is a platform for students to showcase their creativity by giving them
+                    the opportunity to upload their short videos and also watch movies while adhering to time time
+                    management.</p>
+                <a class="text-light bg-accent px-8 py-2 rounded-sm w-fit mx-auto" href="{% url 'register' %}">Join Us
+                </a>
+            </div>
+        </div>
+        <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 -rotate-[49deg] -top-[80%] left-[58%]">
+        </div>
+        <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 -rotate-[49deg] -top-[80%] left-[78%]">
+        </div>
+    </section>
+
+    <section class="py-36 relative overflow-hidden" id="trending">
+        <h2 class="font-bold text-3xl text-primary text-center pb-20">Most Popular Movies</h2>
+        <div class="grid grid-cols-3 my-2 py-4 pb-36 z-20">
+            <div class="z-20 shadow-2xl">
+                <img class="w-full object-cover h-full" src="{% static 'images/popular-movie-1.jpg' %}"
+                    alt="Popular movies 1" />
+            </div>
+            <div class="z-20 shadow-2xl">
+                <img class="w-full object-cover h-full" src="{% static 'images/popular-movie-2.jpg' %}"
+                    alt="Popular movies 2" />
+            </div>
+            <div class="z-20 shadow-2xl">
+                <img class="w-full object-cover h-full" src="{% static 'images/popular-movie-3.jpg' %}"
+                    alt="Popular movies 3" />
+            </div>
+        </div>
+        <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 rotate-45 -top-[80%] left-[30%]">
+        </div>
+        <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 rotate-45 -top-[80%] left-[49%]">
+        </div>
+    </section>
+    <section class="py-36 relative overflow-hidden px-32 bg-[#CFDAE9]" id="features">
+        <h2 class="font-bold text-3xl text-primary text-center">Our Featues</h2>
+        <div class="grid grid-cols-2 grid-rows-3 gap-x-80 gap-y-28 my-2 py-4 z-20 justify-items-center">
+            <div class="z-20 flex gap-5 h-fit">
+                <div>
+
+                    <img class="w-full h-28 object-cover" src="{% static 'images/schedule.jpg' %}"
+                        alt="Popular movies 1" />
+                </div>
+                <div>
+                    <h3 class="text-2xl text-primary font-bold">Upload</h3>
+                    <p class="text-base">Share your moments and short movies
+                        with the world by uploading them on
+                        collywood.</p>
+                </div>
+            </div>
+            <div class="z-20 flex gap-5 h-fit">
+                <div>
+
+                    <img class="w-full h-28 object-cover" src="{% static 'images/timer.jpg' %}"
+                        alt="Popular movies 2" />
+                </div>
+                <div>
+                    <h3 class="text-2xl text-primary font-bold">Upload</h3>
+                    <p class="text-base">Share your moments and short movies
+                        with the world by uploading them on
+                        collywood.</p>
+                </div>
+            </div>
+            <div class="z-20 flex gap-5 h-fit">
+                <div>
+
+                    <img class="w-full h-28 object-cover" src="{% static 'images/upload.jpg' %}"
+                        alt="Popular movies 3" />
+                </div>
+                <div>
+                    <h3 class="text-2xl text-primary font-bold">Upload</h3>
+                    <p class="text-base">Share your moments and short movies
+                        with the world by uploading them on
+                        collywood.</p>
+                </div>
+            </div>
+            <div class="z-20 flex gap-5 h-fit">
+                <div>
+
+                    <img class="w-full h-28 object-cover " src="{% static 'images/interact.jpg' %}"
+                        alt="Popular movies 3" />
+                </div>
+                <div>
+                    <h3 class="text-2xl text-primary font-bold">Upload</h3>
+                    <p class="text-base">Share your moments and short movies
+                        with the world by uploading them on
+                        collywood.</p>
+                </div>
+            </div>
+            <div class="z-20 flex gap-5 h-fit col-span-2 w-96">
+                <div>
+
+                    <img class="w-full h-28 object-cover" src="{% static 'images/streaming.jpg' %}"
+                        alt="Popular movies 3" />
+                </div>
+                <div>
+                    <h3 class="text-2xl text-primary font-bold">Upload</h3>
+                    <p class="text-base">Share your moments and short movies
+                        with the world by uploading them on
+                        collywood.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="grid grid-cols-3 bg-[#3965A2] text-light py-28 justify-items-center" id="contact">
+    <div>
+        <h5 class="font-bold text-xl">Company</h5>
+        <div class="bg-[#F3B0B0] w-24 rounded-lg h-1 my-1"></div>
+        <ul class="my-2 flex flex-col gap-2">
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="font-bold text-xl">Get Help</h5>
+        <div class="bg-[#F3B0B0] w-24 rounded-lg h-1 my-1"></div>
+        <ul class="my-2 flex flex-col gap-2">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Feedback</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="font-bold text-xl">Follow Us</h5>
+        <div class="bg-[#F3B0B0] w-24 rounded-lg h-1 my-1"></div>
+        <ul class="my-4 flex gap-2">
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-snapchat-ghost" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+</footer>
+{% endblock content %}

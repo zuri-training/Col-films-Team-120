@@ -32,7 +32,7 @@ urlpatterns = [
 
     # LIKES ENDPOINTS
     path('likes/', LikeView.as_view()),
-    path('likes/<int:video_id>', LikeView.as_view()),
+    path('likes/<int:video_id>/', LikeView.as_view()),
 
     # COMMENTS ENDPOINTS
     path('comments/', CommentView.as_view()),

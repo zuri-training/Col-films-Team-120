@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: 'Exo', sans-serif !important;
+    font-size: 16px;
+}
+
+.banner-heading {
+    font-family: 'Great Vibes', cursive;
+}
+
+.form-input {
+    @apply rounded-lg p-2 w-full block
+}
+
+.background{
+    background-image: url("images/loginbg.jpg") !important;
+    background-size: cover;
+}
