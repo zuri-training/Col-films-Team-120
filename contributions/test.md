@@ -1,9 +1,9 @@
-# Ogieleguea Hillary
+# Bolaji Jimoh
 
-##### Fullstack Development / Assistant Team Lead: Full Time
+##### Fullstack Development / Contibutor: Full Time
 
 ## Contributions
 
 | Issue/ Task             | Pull Request / Issues / Commit                                                      |
 | ----------------------- | ----------------------------------------------------------------------------------- |
-| Backend Api Development | [Backend Pull Request](https://github.com/zuri-training/Col-films-Team-120/pull/16) |
+| History and Library pages | [added contributions pull request](https://github.com/zuri-training/Col-films-Team-120/pull/25) |
