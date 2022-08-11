@@ -14,6 +14,8 @@ class VideoSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField(read_only=True)
     video_file = serializers.SerializerMethodField('get_video')
     likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # comments =
+    # likes = serializers.StringRelatedField(read_only=True)
 
     def get_video(self, instance):
         return "http://127.0.0.1:8000/media/{}".format(instance.video_file)
@@ -59,10 +61,10 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = "__all__"
 
-        def create(self, validated_data):
-            liked = validated_data.pop("liked")
-            instance = self.Meta.model(**validated_data)
-            instance.liked = bool(int(liked))
+        # def create(self, validated_data):
+        #     liked = validated_data.pop("liked")
+        #     instance = self.Meta.model(**validated_data)
+        #     instance.liked = bool(int(liked))
 
 
 class CommentSerializer(serializers.ModelSerializer):

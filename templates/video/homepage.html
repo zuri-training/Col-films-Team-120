@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block main %}
+
+<section class="w-100 banner relative max-h-screen">
+    <img src="{% static 'images/background.png' %}" alt="{{ bannerVid.title }}"
+        class="max-h-screen w-full object-cover" />
+    <div class="absolute top-40 z-40 p-10 flex flex-col gap-10 h-full">
+        <h1 class="text-light banner-heading text-5xl">{{ bannerVid.title }}</h1>
+        <p class="text-light md:w-4/5">{{ bannerVid.description }}</p>
+        <div class="flex flex-row gap-5">
+            <a class="p-2 bg-accent rounded-lg text-light" href="{{ bannerVid.get_absolute_url }}">Watch Now</a>
+            <a class="p-2 border border-2 border-accent rounded-lg text-light">Watch later</a>
+        </div>
+    </div>
+    <div class="absolute bg-black top-0 w-full h-full opacity-50 z-20"></div>
+</section>
+<section class="w-full grid grid-cols-3 gap-5 p-10 ">
+    {% for video in videos %}
+    <div class="bg-primary rounded-lg overflow-hidden p-4 flex flex-col gap-6">
+        <img src="{% static 'images/background.png' %}" alt="{{ video.title }}" class="w-full object-cover rounded-lg" />
+
+        <h4 class="text-light font-bold text-3xl">{{ video.title }}</h4>
+        <p class="text-light">{{ video.description }}</p>
+        <div class="flex flex-row gap-5 justify-end p-2">
+            <button class="p-2 bg-accent rounded-lg text-light">{{ video.category.title }}</button>
+            <button class="p-2 text-light">2020</button>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock main %}

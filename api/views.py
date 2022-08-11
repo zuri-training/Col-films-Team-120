@@ -49,6 +49,7 @@ class VideoView(APIView):
             REturn a single video instance to the api response
         '''
         video = self.get_object(video_slug)
+        print(video.likes)
         serializer = VideoSerializer(video)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -254,13 +255,14 @@ class LikeView(APIView):
     '''
         This Api view enables authenticated users to like or dislike videos
     '''
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_likes(self, video_id):
         try:
             likes = Like.objects.filter(video=video_id)
             return likes
         except Like.DoesNotExist:
-            raise Http404
+            raise None
 
     def get_like(self, video_id, user_id):
         '''
@@ -270,7 +272,7 @@ class LikeView(APIView):
             like = Like.objects.get(video=video_id, user=user_id)
             return like
         except Like.DoesNotExist:
-            raise Http404
+            return None
 
     def liked_user(self, video_id, user_id):
         '''
@@ -292,17 +294,21 @@ class LikeView(APIView):
         serializer = LikeSerializer(likes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request):
+    def post(self, request, video_id):
         '''
         Like a video
         '''
-        # user = is_authenticated(request)
-        # if user:
-        if self.liked_user(video_id=request.data["video"], user_id=request.user):
-            like_data = {
-                "user": request.user,
-                **request.data
-            }
+        print(request.data)
+
+        like_data = {
+            "user": request.user.id,
+            "video": video_id,
+            **request.data
+        }
+        # print(self.get_like(video_id=video_id, user_id=request.user))
+        if self.get_like(video_id=video_id, user_id=request.user.id) is None:
+
+            print(like_data)
 
             serializer = LikeSerializer(data=like_data)
 
@@ -311,31 +317,21 @@ class LikeView(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_200_OK)
-        # else:
-        #     raise AuthenticationFailed("UnAuthenticated User")
+            '''
+                Update like object
+            '''
+            # user = is_authenticated(request)
+            # if user:
+            like = self.get_like(
+                video_id=video_id, user_id=request.user)
+            serializer = LikeSerializer(like, data=like_data)
 
-    def put(self, request):
-        '''
-            Update like object
-        '''
-        # user = is_authenticated(request)
-        # if user:
-        like = self.get_like(
-            video_id=request.data["video"], user_id=request.user)
-
-        like_data = {
-            "user": request.user,
-            **request.data
-        }
-        serializer = LikeSerializer(like, data=like_data)
-
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-        # else:
-        #     raise AuthenticationFailed("UnAuthenticated User")
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+            # else:
+            #     raise AuthenticationFailed("UnAuthenticated User")
 
 
 class CommentView(APIView):
@@ -359,16 +355,16 @@ class CommentView(APIView):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request):
+    def post(self, request, video_id):
         '''
         Comment a video
         '''
-        # user = is_authenticated(request)
-        # if user:
         comment_data = {
-            "user": request.user,
+            "user": request.user.id,
+            "video": video_id,
             **request.data
         }
+        print(comment_data)
 
         serializer = CommentSerializer(data=comment_data)
 
