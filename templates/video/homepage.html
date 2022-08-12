@@ -2,29 +2,29 @@
 {% load static %}
 {% block main %}
 
-<section class="w-100 banner relative h-screen">
+<section class="banner relative h-screen">
     <img src="{{ bannerVid.video_img.url }}" alt="{{ bannerVid.title }}" class="h-screen w-full object-cover" />
     <div class="absolute top-[10%] md:top-[30%] z-40 p-10 flex flex-col gap-10 h-full">
         <h1 class="text-light banner-heading text-7xl">{{ bannerVid.title }}</h1>
         <p class="text-light md:w-4/5">{{ bannerVid.description }}</p>
-        <div class="flex flex-row gap-5">
-            <a class="p-2 bg-accent rounded-lg text-light" href="{{ bannerVid.get_absolute_url }}">Watch Now</a>
-            <a class="p-2 border border-2 border-accent rounded-lg text-light">Watch later</a>
+        <div class="flex items-center flex-row gap-5">
+            <a class="py-4 px-8 bg-accent rounded-lg text-light" href="{{ bannerVid.get_absolute_url }}">Watch Now</a>
+            <a class="py-4 px-8 border border-2 border-accent rounded-lg text-light">Watch later</a>
         </div>
     </div>
     <div class="absolute bg-black top-0 w-full h-full opacity-50 z-20"></div>
 </section>
-<section class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-10 px-6 md:p-10 ">
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-10 px-6 md:p-10 ">
     {% for video in videos %}
     <a href="{% url 'single-video' video.slug %}">
-        <div class="bg-primary rounded-lg overflow-hidden p-4 flex flex-col gap-6">
-            <img src="{{ video.video_img.url }}" alt="{{ video.title }}" class="w-full object-cover rounded-lg" />
+        <div class="bg-primary rounded-md overflow-hidden p-2 flex flex-col gap-6">
+            <img src="{{ video.video_img.url }}" alt="{{ video.title }}" class="w-full object-cover rounded-md" />
 
             <h4 class="text-light font-bold text-3xl">{{ video.title }}</h4>
             <p class="text-light">{{ video.description }}</p>
             <div class="flex flex-row gap-5 justify-end p-2">
                 <button class="p-2 bg-accent rounded-lg text-light">{{ video.category.title }}</button>
-                <button class="p-2 text-light">2020</button>
+                <button class="p-2 text-light">{{ video.created_at|date:'Y' }}</button>
             </div>
         </div>
     </a>

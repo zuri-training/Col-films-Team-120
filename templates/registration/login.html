@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 <div class="w-screen flex justify-center items-center min-h-screen background">
-    <main class="md:w-2/5 bg-light h-full p-8 rounded-md z-10">
-        <h2 class="text-center p-4 text-primary font-bold text-3xl">Welcome Back</h2>
+    <main class="md:w-2/5 bg-light h-full p-8 rounded-md z-10 dark:bg-black dark:text-light">
+        <h2 class="text-center p-4 text-primary dark:text-inherit font-bold text-3xl">Welcome Back</h2>
         <form method="post" class="w-full flex flex-col gap-5">
             {% csrf_token %}
             <div class="w-full">
@@ -21,9 +21,9 @@
             </div>
             <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Log In</button>
         </form>
-        <p class="text-primary py-4 text-small">Don't have an account? <span class="text-accent"><a
+        <p class="text-primary py-4 text-small dark:text-inherit">Don't have an account? <span class="text-accent"><a
                     href="{% url 'register' %}">Sign up instead</a></span></p>
     </main>
-    <div class="absolute top-0 bg-black opacity-50 w-full h-full"></div>
+    <div class="absolute top-0 bg-black opacity-50 dark:opacity-90 w-full h-full"></div>
 </div>
 {% endblock content %}

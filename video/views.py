@@ -3,7 +3,8 @@ from .models import Category, Video
 from django.contrib.auth.decorators import login_required
 from .forms import VideoForm
 from django.http import JsonResponse
-from moviepy.editor import *
+from django.contrib.sites.shortcuts import get_current_site
+from moviepy.editor import VideoFileClip
 
 
 def landingView(request):
@@ -30,8 +31,8 @@ def uploadVideoView(request):
         form = VideoForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
-            return redirect("/accounts/profile")
+            form.save(commit=False)
+            # return redirect("/accounts/profile")
         else:
             formData = form.errors.get_json_data()
             for err in formData:

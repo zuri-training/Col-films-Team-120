@@ -2,7 +2,7 @@
 {% load static %}
 {% block main %}
 <div class="flex w-100 py-28 px-4 flex-col">
-    <div class="flex gap-5 items-center py-8">
+    <div class="flex flex-col md:flex-row gap-5 items-center py-8">
         <div>
             <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
         </div>
@@ -23,7 +23,7 @@
         <section class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:p-5 ">
             {% for video in myVideos %}
             <a href="{% url 'single-video' video.slug %}">
-                <div class="bg-primary rounded-lg overflow-hidden p-4 flex flex-col gap-6 justify-stretch h-full">
+                <div class="bg-primary rounded-lg overflow-hidden p-2 flex flex-col gap-6">
                     <img src="{{ video.video_img.url }}" alt="{{ video.title }}" class="w-full object-cover rounded-lg" />
 
                     <h4 class="text-light font-bold text-3xl">{{ video.title }}</h4>
@@ -32,10 +32,10 @@
                         <button class="p-2 bg-accent rounded-lg text-light">{{ video.category.title }}</button>
                         <button class="p-2 text-light">2020</button>
                     </div>
+                </div>
             </a>
+            {% endfor %}
+        </section>
     </div>
-    {% endfor %}
-    </section>
-</div>
 </div>
 {% endblock main %}

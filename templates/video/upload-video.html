@@ -51,16 +51,24 @@
             <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Upload
                 Video</button>
         </form>
+        <video src="" class="hidden" id="vid"></video>
     </div>
 </div>
 
 {% endblock main %}
 {% block javascript %}
 <script>
+
+
+
+</script>
+
+<script>
     $("document").ready(() => {
         $("#new-video").on("submit", (e) => {
             e.preventDefault();
-            console.log("testing")
+            //console.log(e.target[5].files[0].name)
+            //console.log("testing")
             var fields = ["title", "description", "video_file", "category"]
             for (field in fields) {
                 $("#id_" + fields[field]).removeClass("border-red-700")
@@ -73,6 +81,9 @@
                 current = formData[data]
                 userData[current.name] = current.value
             }
+            /*console.log(formData)
+            $("#vid").src = e.target[5].files[0].name
+            console.log(e.target[5].files[0].name)*/
 
             $.ajax({
                 url: "{% url 'upload-video' %}",

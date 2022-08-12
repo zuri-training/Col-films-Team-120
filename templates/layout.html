@@ -3,11 +3,12 @@
 {% block content %}
 
 <div
-    class="fixed z-50 top-0 w-screen flex bg-light justify-between py-2 px-4 md:pr-10 md:pl-28 items-center shadow-sm gap-5">
-    <div class="text-primary md:fixed left-0 md:p-6 hidden md:block" id="menu-text-toggler"><i
+    class="fixed z-50 top-0 w-screen flex bg-light dark:bg-black text-primary dark:text-light justify-between py-2 px-4 md:pr-10 md:pl-28 items-center shadow-sm gap-5">
+    <div class="text-inherit md:fixed left-0 md:p-6 hidden md:block" id="menu-text-toggler"><i
             class="fa fa-th-large fa-2x" aria-hidden="true"></i></div>
     <div>
-        <a href="{% url 'landingpage' %}"><img src="{%static 'logo.png' %}" alt="collywood" /></a>
+        <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" />
+        <img src="{%static 'logo-dark.png' %}" alt="collywood" class="hidden dark:block" />
     </div>
     <div class="hidden md:block">
         <form action="." method="get">
@@ -26,7 +27,7 @@
             <a href="{% url 'profile' %}"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
             {% else %}
             <div class="flex gap-5 items-center">
-                <a href="{%url 'login' %}" class="text-primary">Login</a>
+                <a href="{%url 'login' %}" class="">Login</a>
                 <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
             </div>
             {% endif %}
@@ -35,21 +36,23 @@
 </div>
 
 
-<div class="container-lg mx-auto">
-    <div class="md:grid grid-cols-12 w-screen">
+<div class="container-lg w-full mx-auto">
+    <div class="md:flex">
         <div
-            class="fixed bottom-0 w-full md:left-0 md:top-0 md:static flex md:flex-col bg-light md:col-span-1 z-40 p-4 md:pt-28 items-center">
+            class="fixed md:sticky bottom-0 md:left-0 md:top-0 md:none flex md:flex-col bg-light dark:bg-black dark:text-light md:col-span-1 z-40 p-4 md:pt-28 items-center">
             <div class="flex md:flex-col justify-around w-full md:gap-5">
-                <a href="{% url 'homepage' %}" class="flex md:w-full"><img src="{% static 'images/home-2.png' %}"
-                        alt="Homepage">&nbsp;<span class="menu-text hidden">Homepage</span></a>
-                <a href="{% url 'profile' %}" class="flex md:w-full"><img src="{% static 'images/video-octagon.png' %}"
-                        alt="your profile">&nbsp;<span class="menu-text hidden">Profile</span> </a>
-                <a href="{% url 'upload-video' %}" class="flex md:w-full"><img
+                <a href="{% url 'homepage' %}" class="flex gap-2 items-center justify-between md:w-full"><img
+                        src="{% static 'images/home-2.png' %}" alt="Homepage">&nbsp;<span
+                        class="menu-text hidden pr-4">Homepage</span> &nbsp;&nbsp;</a>
+                <a href="{% url 'profile' %}" class="flex md:w-full items-center justify-between gap-2"><img
+                        src="{% static 'images/video-octagon.png' %}" alt="your profile">&nbsp;<span
+                        class="menu-text hidden">Profile</span>&nbsp;</a>
+                <a href="{% url 'upload-video' %}" class="flex gap-2 md:w-full items-center justify-between"><img
                         src="{% static 'images/upload-video.png' %}" alt="upload videos">&nbsp;<span
-                        class="menu-text hidden">Upload Video</span></a>
+                        class="menu-text hidden">Upload Video</span> &nbsp;</a>
             </div>
         </div>
-        <div class="py-20 md:col-span-11 mx-auto">
+        <div class="py-20 w-full mx-auto dark:bg-black">
             {% block main %}{% endblock main %}
         </div>
     </div>
