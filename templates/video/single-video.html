@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block main %}
-<div class="grid md:grid-cols-3 gap-5 p-6">
+<div class="grid md:grid-cols-3 gap-5 p-6 dark:text-light">
     <div class="col-span-2">
         <video controls width="100%" height="100%" poster="{{ video.video_img.url }}">
             <source src="{{ video.video_file.url }}" type="video/mp4">
         </video>
         <div class="p-6 flex flex-col gap-2">
 
-            <h2 class="text-primary font-semibold text-2xl">{{ video.title }}</h2>
+            <h2 class="text-primary dark:text-light font-semibold text-2xl">{{ video.title }}</h2>
             <p>{{ video.description }}</h2>
         </div>
 

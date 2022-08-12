@@ -41,11 +41,22 @@
   <script src="{% static 'jquery.min.js' %}"></script>
   <script>
     $("document").ready(() => {
-
+      if (localStorage.getItem("dark") === "1") {
+        $("html").addClass("dark")
+        $("#toggler-icon").toggleClass("fa-toggle-on")
+        $("#toggler-icon").toggleClass("fa-toggle-off")
+      }
       $("#dark-mode-toggler").on("click", () => {
-        $("html").toggleClass("dark")
         $("#toggler-icon").toggleClass("fa-toggle-off")
         $("#toggler-icon").toggleClass("fa-toggle-on")
+        if (localStorage.getItem("dark") === "1") {
+          localStorage.setItem("dark", "0")
+          $("html").removeClass("dark")
+        } else {
+          localStorage.setItem("dark", "1")
+          $("html").addClass("dark")
+        }
+        console.log(localStorage.getItem("dark"))
       })
 
       $("#menu-text-toggler").on("click", () => {
