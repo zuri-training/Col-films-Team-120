@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Category, Video
 from django.contrib.auth.decorators import login_required
-from .forms import VideoForm
+from .forms import LikeForm, VideoForm
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
 from moviepy.editor import VideoFileClip
@@ -42,3 +42,13 @@ def uploadVideoView(request):
         vidform = VideoForm()
         categories = Category.objects.all()
         return render(request, "video/upload-video.html", {"form": vidform, "categories": categories})
+
+
+def LikeVideo(request, video_id):
+    if request.method == "POST":
+        form = LikeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": "liked successfully"})
+        else:
+            return JsonResponse({"Unable to like"})
