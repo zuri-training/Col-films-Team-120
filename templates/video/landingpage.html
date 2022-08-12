@@ -2,33 +2,41 @@
 {% load static %}
 {% block content %}
 <div
-    class="fixed z-50 top-0 w-screen bg-light flex justify-between py-2 pr-10 pl-28 items-center border border-2 shadow-sm">
-    <div class="text-primary fixed left-0 p-6"><i class="fa fa-th-large fa-3x " aria-hidden="true"></i></div>
+    class="fixed z-50 top-0 w-screen bg-light flex justify-between py-2 pr-10 pl-6 items-center border border-2 shadow-sm">
     <div>
         <img src="{%static 'logo.png' %}" alt="collywood" />
     </div>
-    <nav class="flex gap-5 text-primary">
+    <button class="md:hidden" id="menu-toggler"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button>
+    <nav class="hidden md:flex bg-light z-50 text-primary gap-5">
         <a href="{% url 'landingpage' %}">Home</a>
         <a href="#about-us">About</a>
         <a href="#trending">Trending</a>
         <a href="#features">Features</a>
         <a href="#contact">Contact Us</a>
+
     </nav>
-    <div>
-        {% if request.user.is_authenticated %}
-        <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
-        {% else %}
-        <div class="flex gap-5 items-center">
+    <div class="hidden md:flex gap-5 items-center justify-center">
+        <a href="{%url 'login' %}" class="text-primary">Login</a>
+        <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+    </div>
+    <nav class="hidden md:hidden gap-10 menu flex flex-col w-full absolute left-0 top-20 p-8 bg-light z-50 text-center text-primary"
+        id="menu">
+        <a href="{% url 'landingpage' %}">Home</a>
+        <a href="#about-us">About</a>
+        <a href="#trending">Trending</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact Us</a>
+        <div class="flex gap-5 items-center justify-center">
             <a href="{%url 'login' %}" class="text-primary">Login</a>
             <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
         </div>
-        {% endif %}
-    </div>
+    </nav>
 </div>
 <main class="pt-20">
-    <section class="min-h-screen grid grid-cols-2 relative p-2 relative items-center overflow-hidden">
+    <section class="min-h-screen grid md:grid-cols-2 relative p-2 relative items-center overflow-hidden">
         <div class="p-4 flex flex-col gap-5">
-            <h1 class="text-7xl font-bold ">Discover the buzz among <span class="text-accent">College Students</span>
+            <h1 class="text-6xl md:text-7xl font-bold ">Discover the buzz among <span class="text-accent">College
+                    Students</span>
             </h1>
             <p>Upload, Interact and Watch college students display their true talents on Collywood</p>
             <a href="{% url 'homepage' %}" class="px-6 py-2 bg-accent rounded-sm text-light w-fit">Start
@@ -45,7 +53,7 @@
         </div>
     </section>
     <section class="py-36 bg-[#CFDAE9] opacity-100 relative overflow-hidden" id="about-us">
-        <div class="grid grid-cols-7 m-2 p-4 z-20">
+        <div class="grid md:grid-cols-7 m-2 p-4 z-20">
             <div class="col-span-4 z-20">
                 <img src="{% static 'images/about-us.png' %}" alt="about collywood" />
             </div>
@@ -85,10 +93,11 @@
         <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 rotate-45 -top-[80%] left-[49%]">
         </div>
     </section>
-    <section class="py-36 relative overflow-hidden px-32 bg-[#CFDAE9]" id="features">
+    <section class="py-36 relative overflow-hidden px-4 md:px-32 bg-[#CFDAE9]" id="features">
         <h2 class="font-bold text-3xl text-primary text-center">Our Featues</h2>
-        <div class="grid grid-cols-2 grid-rows-3 gap-x-80 gap-y-28 my-2 py-4 z-20 justify-items-center">
-            <div class="z-20 flex gap-5 h-fit">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 md:gap-x-80 gap-y-28 my-2 py-4 z-20 justify-items-center justify-center">
+            <div class="z-20 flex flex-col md:flex-row gap-5 h-fit w-full">
                 <div>
 
                     <img class="w-full h-28 object-cover" src="{% static 'images/schedule.jpg' %}"
@@ -101,7 +110,7 @@
                         collywood.</p>
                 </div>
             </div>
-            <div class="z-20 flex gap-5 h-fit">
+            <div class="z-20 flex flex-col md:flex-row gap-5 h-fit w-full">
                 <div>
 
                     <img class="w-full h-28 object-cover" src="{% static 'images/timer.jpg' %}"
@@ -114,7 +123,7 @@
                         collywood.</p>
                 </div>
             </div>
-            <div class="z-20 flex gap-5 h-fit">
+            <div class="z-20 flex flex-col md:flex-row gap-5 h- w-full">
                 <div>
 
                     <img class="w-full h-28 object-cover" src="{% static 'images/upload.jpg' %}"
@@ -127,7 +136,7 @@
                         collywood.</p>
                 </div>
             </div>
-            <div class="z-20 flex gap-5 h-fit">
+            <div class="z-20 flex flex-col md:flex-row gap-5 h-fit w-full">
                 <div>
 
                     <img class="w-full h-28 object-cover " src="{% static 'images/interact.jpg' %}"
@@ -140,7 +149,7 @@
                         collywood.</p>
                 </div>
             </div>
-            <div class="z-20 flex gap-5 h-fit col-span-2 w-96">
+            <div class="z-20 flex flex-col md:flex-row gap-5 h-fit md:col-span-2 md:w-96 w-full">
                 <div>
 
                     <img class="w-full h-28 object-cover" src="{% static 'images/streaming.jpg' %}"
@@ -156,7 +165,7 @@
         </div>
     </section>
 </main>
-<footer class="grid grid-cols-3 bg-[#3965A2] text-light py-28 justify-items-center" id="contact">
+<footer class="grid gap-5 md:grid-cols-3 bg-[#3965A2] text-light py-28 justify-items-center" id="contact">
     <div>
         <h5 class="font-bold text-xl">Company</h5>
         <div class="bg-[#F3B0B0] w-24 rounded-lg h-1 my-1"></div>
@@ -187,3 +196,12 @@
     </div>
 </footer>
 {% endblock content %}
+{% block javascript %}
+<script>
+    $("document").ready(() => {
+        $("#menu-toggler").on("click", () => {
+            $("#menu").toggleClass("hidden")
+        })
+    })
+</script>
+{% endblock javascript %}

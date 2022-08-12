@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+<div class="border m-24 p-4 md:p-14 mx-auto">
+
+    <h2 class="p-4 text-primary text-3xl">Upload video</h2>
+    <hr class="text-primary mb-8" />
+    <div class="flex justify-center items-center">
+        <form method="post" class="flex flex-col gap-5" id="new-video" enctype="multipart/form-data">
+            <p id="success" class="text-center text-light fixed top-0 rounded-md p-2 text-small"></p>
+            {% csrf_token %}
+            <input type="hidden" value="{{ request.user.id }}" name="author" />
+            <div class="">
+                <label for="id_title">Title: </label>
+                <input type="text" name="title" maxlength="50" required="" id="id_title"
+                    class="w-full block border p-2">
+                <p class="text-xs text-red-700" id="err_title">
+                    <p>
+            </div>
+            <div class="">
+                <label for="id_description">Description:</label>
+                <textarea name="description" cols="40" rows="10" required="" id="id_description"
+                    class="w-full block border p-2"></textarea>
+                <p class="text-xs text-red-700" id="err_description">
+                    <p>
+            </div>
+            <div class="">
+                <label for="id_video_img">Cover Image:</label>
+                <input type="file" name="video_img" id="id_video_img" class="w-full block border p-2">
+                <p class="text-xs text-red-700" id="err_video_img">
+                    <p>
+            </div>
+            <div class="">
+                <label for="id_video_file">Video:</label>
+                <input type="file" name="video_file" id="id_video_file" class="w-full block border p-2">
+                <p class="text-xs text-red-700" id="err_video_file">
+                    <p>
+            </div>
+            <div class="">
+                <label for="id_category">Categories:</label>
+                <select name="category" required id="id_category" class="w-full block border p-2 ">
+                    <option value="" selected="">---------</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+                <p class="text-xs text-red-700" id="err_category">
+                    <p>
+            </div>
+            <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Upload
+                Video</button>
+        </form>
+    </div>
+</div>
+
+{% endblock main %}
+{% block javascript %}
+<script>
+    $("document").ready(() => {
+        $("#new-video").on("submit", (e) => {
+            e.preventDefault();
+            console.log("testing")
+            var fields = ["title", "description", "video_file", "category"]
+            for (field in fields) {
+                $("#id_" + fields[field]).removeClass("border-red-700")
+                $("#err_" + fields[field]).text("")
+                console.log(fields[field])
+            }
+            var formData = $("#new-video").serializeArray()
+            userData = {}
+            for (data in formData) {
+                current = formData[data]
+                userData[current.name] = current.value
+            }
+
+            $.ajax({
+                url: "{% url 'upload-video' %}",
+                type: "POST",
+                data: userData,
+                contentType: 'multipart/form-data'
+
+                success: (json) => {
+                    if (json["success"]) {
+                        $("#success").addClass("bg-green-500")
+                        $("#success").text(json["success"])
+                        window.location.href = "{% url 'profile' %}"
+                    } else {
+                        for (err in json) {
+                            $("#id_" + err).addClass("border-red-700")
+                            $("#err_" + err).text(json[err][0]["message"])
+                            console.log(json[err])
+                        }
+                    }
+                    console.log(json)
+                },
+
+                error: (xhr, errmsg, err) => {
+                    console.log(xhr.status + xhr.responseText)
+                }
+            })
+        })
+    })
+</script>
+{% endblock javascript %}

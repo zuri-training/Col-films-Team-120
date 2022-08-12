@@ -3,14 +3,16 @@
 {% block content %}
 
 <div
-    class="fixed z-50 top-0 w-screen bg-light flex justify-between py-2 pr-10 pl-28 items-center border border-2 shadow-sm">
-    <div class="text-primary fixed left-0 p-6"><i class="fa fa-th-large fa-3x " aria-hidden="true"></i></div>
+    class="fixed z-50 top-0 w-screen flex bg-light justify-between py-2 px-4 md:pr-10 md:pl-28 items-center shadow-sm gap-5">
+    <div class="text-primary md:fixed left-0 md:p-6 hidden md:block" id="menu-text-toggler"><i
+            class="fa fa-th-large fa-2x" aria-hidden="true"></i></div>
     <div>
-        <img src="{%static 'logo.png' %}" alt="collywood" />
+        <a href="{% url 'landingpage' %}"><img src="{%static 'logo.png' %}" alt="collywood" /></a>
     </div>
-    <div>
+    <div class="hidden md:block">
         <form action="." method="get">
-            <input type="text" name="search" class="border border-solid border-2 rounded-md p-2 text-primary w-96   "
+            <input type="text" name="search"
+                class="border border-solid border-2 rounded-md p-2 text-primary lg:w-96 md:w-60"
                 placeholder="search video name or hashtags" />
             <button>
                 <i class="fa fa-search fa-lg" aria-hidden="true"></i>
@@ -19,22 +21,41 @@
 
     </div>
     <div>
-        <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+        <div>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
+            {% else %}
+            <div class="flex gap-5 items-center">
+                <a href="{%url 'login' %}" class="text-primary">Login</a>
+                <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </div>
 
 
 <div class="container-lg mx-auto">
-    <div class="grid grid-cols-12 w-screen">
-        <div class="flex flex-col col-span-1 z-40 pt-28 items-center">
-            <div class="flex flex-col">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+    <div class="md:grid grid-cols-12 w-screen">
+        <div
+            class="fixed bottom-0 w-full md:left-0 md:top-0 md:static flex md:flex-col bg-light md:col-span-1 z-40 p-4 md:pt-28 items-center">
+            <div class="flex md:flex-col justify-around w-full md:gap-5">
+                <a href="{% url 'homepage' %}" class="flex md:w-full"><img src="{% static 'images/home-2.png' %}"
+                        alt="Homepage">&nbsp;<span class="menu-text hidden">Homepage</span></a>
+                <a href="{% url 'profile' %}" class="flex md:w-full"><img src="{% static 'images/video-octagon.png' %}"
+                        alt="your profile">&nbsp;<span class="menu-text hidden">Profile</span> </a>
+                <a href="{% url 'upload-video' %}" class="flex md:w-full"><img
+                        src="{% static 'images/upload-video.png' %}" alt="upload videos">&nbsp;<span
+                        class="menu-text hidden">Upload Video</span></a>
             </div>
         </div>
-        <div class="py-20 col-span-11">
+        <div class="py-20 md:col-span-11 mx-auto">
             {% block main %}{% endblock main %}
         </div>
     </div>
 </div>
 
 {% endblock content %}
+{% block javascript %}
+<!-- javascipt-->
+{% endblock javascript %}

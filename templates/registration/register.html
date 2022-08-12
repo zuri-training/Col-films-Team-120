@@ -1,51 +1,118 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="flex justify-center items-center min-h-screen background relative p-8">
+<div class="flex justify-center items-center min-h-screen background relative py-8 md:p-8">
     <main class="md:w-2/5 h-full p-8 rounded-md z-10 bg-light">
         <h2 class="font-bold text-primary text-3xl text-center p-4">Welcome to Collywood</h2>
-        <form method="post" class="w-full flex flex-col gap-5">
+        <form method="post" class="w-full flex flex-col gap-5" id="register-form">
+            <p id="success" class="text-center text-light rounded-md p-2 text-small"></p>
             {% csrf_token %}
             <div>
                 <label for="id_email">Email:</label>
                 <input type="text" name="email" maxlength="150" autocapitalize="none" autocomplete="email" autofocus
                     id="id_email" class="rounded-lg block w-full p-2 border">
-                {% comment %} <p>{{ form.errors }}</p> {% endcomment %}
+                <p class="text-xs text-red-700" id="err_email">
+                    <p>
             </div>
             <div>
                 <label for="id_username">Username:</label>
                 <input type="text" name="username" maxlength="100" id="id_username"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_username">
+                    <p>
             </div>
             <div>
                 <label for="id_first_name">First Name:</label>
                 <input type="text" name="first_name" maxlength="100" id="id_first_name"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_first_name">
+                    <p>
             </div>
             <div>
                 <label for="id_last_name">Last Name:</label>
                 <input type="text" name="last_name" maxlength="100" id="id_last_name"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_last_name">
+                    <p>
             </div>
             <div>
                 <label for="id_school">School:</label>
                 <input type="text" name="school" maxlength="100" id="id_school"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_school">
+                    <p>
+
             </div>
             <div>
                 <label for="id_password1">Password:</label>
                 <input type="password" name="password1" autocomplete="new-password" id="id_password1"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_password1">
+                    <p>
+
             </div>
             <div>
                 <label for="id_password2">Password confirmation:</label>
                 <input type="password" name="password2" autocomplete="new-password" id="id_password2"
                     class="rounded-lg block w-full p-2 border">
+                <p class="text-xs text-red-700" id="err_password2">
+                    <p>
+
             </div>
             <button class="bg-accent text-light w-2/5 p-2 rounded-lg mx-auto">Submit</button>
         </form>
+        <p class="text-primary py-4 text-small">Already have an account? <span class="text-accent"><a
+                    href="{% url 'login' %}">Sign in instead</a></span></p>
     </main>
     <div class="absolute top-0 bg-black opacity-50 w-full h-full"></div>
 </div>
 
 {% endblock content %}
+{% block javascript %}
+<script>
+    $("document").ready(() => {
+        $("#register-form").on("submit", (e) => {
+            e.preventDefault();
+            var fields = ["email", "username", "last_name", "first_name", "school", "password1",
+                "password2"
+            ]
+            for (field in fields) {
+                $("#id_" + fields[field]).removeClass("border-red-700")
+                $("#err_" + fields[field]).text("")
+                console.log(fields[field])
+            }
+            var formData = $("#register-form").serializeArray()
+            userData = {}
+            for (data in formData) {
+                current = formData[data]
+                userData[current.name] = current.value
+            }
+
+            $.ajax({
+                url: "{% url 'register' %}",
+                type: "POST",
+                data: userData,
+
+                success: (json) => {
+                    if (json["success"]) {
+                        $("#success").addClass("bg-green-500")
+                        $("#success").text(json["success"])
+                        window.location.href = "{% url 'login' %}"
+                    } else {
+                        for (err in json) {
+                            $("#id_" + err).addClass("border-red-700")
+                            $("#err_" + err).text(json[err][0]["message"])
+                            console.log(json[err])
+                        }
+                    }
+                    console.log(json)
+                },
+
+                error: (xhr, errmsg, err) => {
+                    console.log(xhr.status + xhr.responseText)
+                }
+            })
+        })
+    })
+</script>
+{% endblock javascript %}

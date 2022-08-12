@@ -2,12 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
 class MemberManager(BaseUserManager):
 
-    def create_user(self, email, first_name, last_name, school, grad_year, password, username, **other_fields):
+    def create_user(self, email, first_name, last_name, school, password, username, **other_fields):
 
         if not email:
             raise ValueError("Email field is required")
@@ -17,7 +18,7 @@ class MemberManager(BaseUserManager):
 
         email = self.normalize_email(email)
         user = self.model(email=email, username=username, first_name=first_name,
-                          last_name=last_name, school=school, grad_year=grad_year, **other_fields)
+                          last_name=last_name, school=school, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -35,9 +36,20 @@ class MemberManager(BaseUserManager):
         return self.create_user(email=email, password=password, username=username, **other_fields)
 
 
+def validate_email(email):
+    """
+        Check the email to ensure a valid student email is passed
+    """
+    if ".edu" not in email.split("@")[1]:
+        raise ValidationError("Email must be a school email")
+    else:
+        return email
+
+
 class Member(AbstractBaseUser, PermissionsMixin):
 
-    email = models.EmailField(_("Email Address"), max_length=254, unique=True)
+    email = models.EmailField(
+        _("Email Address"), max_length=254, unique=True, validators=[validate_email])
     username = models.CharField(
         _("Username"), max_length=50, unique=True, null=True)
     first_name = models.CharField(_("Firstname"), max_length=50)

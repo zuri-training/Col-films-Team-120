@@ -47,11 +47,14 @@ class Video(models.Model):
     title = models.CharField(_("Title"), max_length=50, unique=True)
     slug = models.SlugField(_("Slug"), blank=True)
     description = models.TextField(_("Description"))
+    video_img = models.FileField(
+        _("Cover Image"), upload_to="videos/%Y/%m", max_length=100, validators=[FileExtensionValidator(["jpg", "jpeg", "png", "webp"])])
     video_file = models.FileField(
-        _("Video"), upload_to="videos/%Y/%m", max_length=100, blank=True, validators=[FileExtensionValidator(['mp4'])])
+        _("Video"), upload_to="videos/%Y/%m", max_length=100, validators=[FileExtensionValidator(['mp4'])])
     category = models.ForeignKey(Category, verbose_name=_(
         "Categories"), on_delete=models.CASCADE)
-    published = models.BooleanField(_("Published"), default=False, blank=True)
+    published = models.BooleanField(_("Published"), default=True, blank=True)
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
 
     class Meta:
         verbose_name = _("Video")

@@ -37,6 +37,17 @@
 
 <body>
   {% block content %}{% endblock content %}
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script>
+    $("document").ready(() => {
+      $("#menu-text-toggler").on("click", () => {
+        $(".menu-text").toggleClass("hidden")
+      })
+    })
+  </script>
+  {% block javascript %}
+
+  {% endblock javascript %}
 </body>
 
 </html>
