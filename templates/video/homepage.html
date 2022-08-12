@@ -4,15 +4,15 @@
 
 <section class="banner relative h-screen">
     <img src="{{ bannerVid.video_img.url }}" alt="{{ bannerVid.title }}" class="h-screen w-full object-cover" />
-    <div class="absolute top-[10%] md:top-[30%] z-40 p-10 flex flex-col gap-10 h-full">
+    <div class="absolute top-[10%] md:top-[30%] z-20 p-10 flex flex-col gap-10 h-full">
         <h1 class="text-light banner-heading text-7xl">{{ bannerVid.title }}</h1>
         <p class="text-light md:w-4/5">{{ bannerVid.description }}</p>
-        <div class="flex items-center flex-row gap-5">
+        <div class="flex items-center flex-col md:flex-row gap-5">
             <a class="py-4 px-8 bg-accent rounded-lg text-light" href="{{ bannerVid.get_absolute_url }}">Watch Now</a>
             <a class="py-4 px-8 border border-2 border-accent rounded-lg text-light">Watch later</a>
         </div>
     </div>
-    <div class="absolute top-0 w-full h-full z-20 bg-gradient-to-r from-black to-gray-500 opacity-80"></div>
+    <div class="absolute top-0 w-full h-full z-10 bg-gradient-to-r from-black to-gray-500 opacity-80"></div>
 </section>
 <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-10 px-6 md:p-10 ">
     {% for video in videos %}
