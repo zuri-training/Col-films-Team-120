@@ -80,6 +80,9 @@ class Like(models.Model):
         "Video"), on_delete=models.CASCADE, related_name="likes")
     liked = models.BooleanField(_("Liked"), null=True, blank=True)
 
+    class Meta:
+        unique_together = ('user', 'video',)
+
     def __str__(self):
         if self.liked:
             return self.user.id
