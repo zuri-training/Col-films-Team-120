@@ -14,6 +14,10 @@ html {
     font-family: 'Great Vibes', cursive;
 }
 
+.banner-overlay{
+    background: radial-gradient(64.86% 64.86% at 83.72% 67.7%, rgba(131, 102, 102, 0) 39.58%, rgba(3, 0, 0, 0.6) 100%);
+}
+
 .form-input {
     @apply rounded-lg p-2 w-full block
 }

@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{%static 'styles.css' %}" />
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
@@ -30,7 +31,7 @@
             primary: ['Exo', 'sans-serif'],
           }
         }
-      }
+      },
     }
   </script>
 </head>
@@ -40,6 +41,13 @@
   <script src="{% static 'jquery.min.js' %}"></script>
   <script>
     $("document").ready(() => {
+
+      $("#dark-mode-toggler").on("click", () => {
+        $("html").toggleClass("dark")
+        $("#toggler-icon").toggleClass("fa-toggle-off")
+        $("#toggler-icon").toggleClass("fa-toggle-on")
+      })
+
       $("#menu-text-toggler").on("click", () => {
         $(".menu-text").toggleClass("hidden")
       })

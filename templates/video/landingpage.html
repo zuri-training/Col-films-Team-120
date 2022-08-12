@@ -16,9 +16,14 @@
         <a href="#contact">Contact Us</a>
 
     </nav>
-    <div class="hidden md:flex gap-5 items-center justify-center">
-        <a href="{%url 'login' %}" class="text-inherit">Login</a>
-        <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+    <div class="flex gap-5 items-center">
+        <span id="dark-mode-toggler">
+            <i class="fa fa-toggle-off fa-2x" aria-hidden="true" id="toggler-icon"></i>
+        </span>
+        <div class="hidden md:flex gap-5 items-center justify-center">
+            <a href="{%url 'login' %}" class="text-inherit">Login</a>
+            <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+        </div>
     </div>
     <nav class="hidden md:hidden gap-10 menu flex flex-col w-full absolute left-0 top-20 p-8 bg-light z-50 text-center text-primary"
         id="menu">

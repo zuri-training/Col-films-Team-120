@@ -10,19 +10,11 @@
         <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" />
         <img src="{%static 'logo-dark.png' %}" alt="collywood" class="hidden dark:block" />
     </div>
-    <div class="hidden md:block">
-        <form action="." method="get">
-            <input type="text" name="search"
-                class="border border-solid border-2 rounded-md p-2 text-primary lg:w-96 md:w-60"
-                placeholder="search video name or hashtags" />
-            <button>
-                <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-            </button>
-        </form>
-
-    </div>
     <div>
-        <div>
+        <div class="flex gap-5 items-center">
+            <span id="dark-mode-toggler">
+                <i class="fa fa-toggle-off fa-2x" aria-hidden="true" id="toggler-icon"></i>
+            </span>
             {% if request.user.is_authenticated %}
             <a href="{% url 'profile' %}"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
             {% else %}
