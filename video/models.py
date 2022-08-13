@@ -97,9 +97,10 @@ class Like(models.Model):
 class Comment(models.Model):
     # Comment model
     user = models.ForeignKey(Member, verbose_name=_(
-        "user"), on_delete=models.CASCADE)
+        "user"), on_delete=models.CASCADE, related_name="comments")
+    full_name = models.CharField(_("Full Name"), max_length=50)
     video = models.ForeignKey(Video, verbose_name=_(
-        "Video"), on_delete=models.CASCADE)
+        "Video"), on_delete=models.CASCADE, related_name="comments")
     body = models.TextField(_("Message"))
 
     class Meta:
@@ -108,6 +109,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{} made a comment on {}".format(self.user.username, self.video.title)
+
+    def save(self, *args, **kwargs):
+        self.full_name = self.user.first_name + " " + self.user.last_name
+        super(Comment, self).save(*args, **kwargs)
 
 
 class ScheduledUpload(models.Model):
