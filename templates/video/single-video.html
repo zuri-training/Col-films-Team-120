@@ -9,7 +9,7 @@
         <div class="p-6 flex flex-col gap-2">
             <div class="flex justify-between">
                 <h2 class="text-primary dark:text-light font-semibold text-2xl">{{ video.title }}</h2>
-                <p class="italic"><span id="reactions"></span> likes</p>
+                <p class="italic text-xs"><span id="reactions"></span> likes</p>
             </div>
             <p>{{ video.description }}</p>
             <div class="flex w-full my-5 border-t p-5 justify-between">
@@ -32,6 +32,22 @@
                         </path>
                     </svg>
                 </div>
+            </div>
+        </div>
+        <div class="pt-20 pb-4">
+            <div class="flex justify-between">
+                <h2 class="text-primary font-bold text-2xl dark:text-light pb-4">Comments</h2>
+                <div class="text-xs"><span id="num-comments"></span> Comments</div>
+            </div>
+            <form method="post" class="flex w-full justify-between bg-accent rounded-lg items-center" id="comment-form">
+                {% csrf_token %}
+                <input type="hidden" name="video" value="{{ video.id }}">
+                <textarea name="body" class="rounded-lg w-full text-black p-4" cols="30"
+                    rows="3">Enter comment here...</textarea>
+                <button type="submit" class="h-fit p-4"><i class="fa fa-paper-plane-o fa-2x"
+                        aria-hidden="true"></i></button>
+            </form>
+            <div class="flex flex-col gap-5" id="comments">
             </div>
         </div>
 
@@ -67,6 +83,7 @@
     $("document").ready(() => {
 
         setInterval(() => {
+            $("#comments").empty()
             $.ajax({
                 url: "{% url 'video-data' %}",
                 type: "GET",
@@ -74,7 +91,20 @@
                     "video": "{{ video.id }}"
                 },
                 success: (json) => {
+                    console.log(json)
                     $("#reactions").html(json.reactions)
+                    $("#num-comments").html(json.numComments)
+                    if (json.numComments) {
+                        comments = JSON.parse(json.comments)
+                        for (comment in comments) {
+                            //console.log(comments)
+                            $("#comments").append(
+                                "<div class='flex flex-col gap-5 border-b pt-10'><h6 class='font-bold text-primary'>" +
+                                comments[comment].fields
+                                .full_name + "</h6><p>" + comments[comment].fields
+                                .body + "</p></div>")
+                        }
+                    }
                     if (json.liked) {
                         $("#like-btn").attr("fill", "red")
                         $("#like").addClass("text-accent")
@@ -82,9 +112,10 @@
                         $("#like-btn").attr("fill", "white")
                         $("#like").removeClass("text-accent")
                     }
+                    //
                 }
             })
-        }, 1000);
+        }, 5000);
 
         $("#like").on("click", () => {
             $.ajax({
@@ -94,6 +125,21 @@
                     'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
                     "video": "{{ video.id }}"
                 },
+                success: (json) => {}
+            })
+        })
+        $("#comment-form").on("submit", (e) => {
+            var formData = $("#comment-form").serializeArray()
+            userData = {}
+            for (data in formData) {
+                current = formData[data]
+                userData[current.name] = current.value
+            }
+            e.preventDefault();
+            $.ajax({
+                url: "{% url 'comment-video' %}",
+                type: "POST",
+                data: userData,
                 success: (json) => {}
             })
         })

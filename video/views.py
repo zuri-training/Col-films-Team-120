@@ -1,10 +1,11 @@
+from json import dumps
 from django.shortcuts import render, redirect
-from .models import Category, Like, Video
+from .models import Category, Comment, Like, Video
 from django.contrib.auth.decorators import login_required
 from .forms import LikeForm, VideoForm
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
-from moviepy.editor import VideoFileClip
+from django.core import serializers
 
 
 def landingView(request):
@@ -30,10 +31,14 @@ def videoView(request, video_slug):
 def videoDataView(request):
     video = Video.objects.get(id=request.GET["video"])
     numReactions = video.likes.all().filter(liked=True).count()
+    numComments = video.comments.all().count()
+    comments = video.comments.filter(video=video).prefetch_related('user')
     userLiked = video.likes.all().filter(user=request.user)
     res = {
         "reactions": numReactions,
-        "liked": userLiked[0].liked
+        "liked": userLiked[0].liked,
+        "numComments": numComments,
+        "comments": serializers.serialize("json", comments),
     }
     return JsonResponse(res)
 
@@ -63,4 +68,14 @@ def LikeVideo(request):
         video = Video.objects.get(id=request.POST["video"])
         userLiked = Like.objects.update_or_create(
             user=request.user, video=video)
+        return JsonResponse({"success": True})
+
+
+@login_required
+def CommentVideo(request):
+    if request.method == "POST":
+        video = Video.objects.get(id=request.POST["video"])
+        userComment = Comment.objects.create(
+            user=request.user, video=video, body=request.POST["body"])
+        userComment.save()
         return JsonResponse({"success": True})
