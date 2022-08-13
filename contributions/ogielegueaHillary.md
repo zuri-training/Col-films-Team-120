@@ -11,3 +11,4 @@
 |Frontend Pages|[Created the frontend pages for landing, homepage, video and profile and upload](https://github.com/zuri-training/Col-films-Team-120/issues/27)|
 |Dark mode functionality|[built and resolve issues with the dark mode functionality](https://github.com/zuri-training/Col-films-Team-120/pull/33)|
 | Add Like Functionality | [Allow users to like videos](https://github.com/zuri-training/Col-films-Team-120/pull/35)|
+| Comment Functionality | [Allow users to comment on videos](https://github.com/zuri-training/Col-films-Team-120/pull/36)
