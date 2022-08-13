@@ -3,21 +3,26 @@
 {% block content %}
 <div class="w-screen flex justify-center items-center min-h-screen background">
     <main class="md:w-2/5 bg-light h-full p-8 rounded-md z-10 dark:bg-black dark:text-light">
-        <h2 class="text-center p-4 text-primary dark:text-inherit font-bold text-3xl">Welcome Back</h2>
-        <form method="post" class="w-full flex flex-col gap-5">
+        <div class="mx-auto w-fit p-8">
+            <a href="{% url 'landingpage' %}"> <img src="{%static 'logo.png' %}" alt="collywood"
+                    class="dark:hidden" /></a>
+            <a href="{% url 'landingpage' %}"><img src="{%static 'logo-dark.png' %}" alt="collywood"
+                    class="hidden dark:block" /></a>
+        </div>
+        <h2 class="text-center pb-8 text-primary dark:text-inherit font-bold text-3xl">Welcome Back</h2>
+        <form method="post" action="." class="w-full flex flex-col gap-5">
             {% csrf_token %}
             <div class="w-full">
 
                 <label for=" id_username">Student Email</label>
                 <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username"
-                    maxlength="254" required id="id_username" class="w-full block border p-2 rounded-md">
+                    maxlength="254" required id="id_username" class="input-field">
             </div>
             <div class="w-full">
 
                 <label for="id_password">Password</label>
                 <input type="password" name="password" autocomplete="current-password" required id="id_password"
-                    class="w-full block border p-2 rounded-md">
-                {% comment %} {{ form.as_p }} {% endcomment %}
+                    class="input-field">
             </div>
             <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Log In</button>
         </form>

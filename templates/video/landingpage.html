@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div
-    class="fixed z-50 top-0 w-screen bg-light text-primary dark:text-light dark:bg-black flex justify-between py-2 pr-10 pl-6 items-center border border-2 dark:border-black shadow-sm">
+<div class="app-bar">
     <div>
-        <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" />
-        <img src="{%static 'logo-dark.png' %}" alt="collywood" class="hidden dark:block" />
+        <a href="{% url 'landingpage' %}"> <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" /></a>
+        <a href="{% url 'landingpage' %}"><img src="{%static 'logo-dark.png' %}" alt="collywood"
+                class="hidden dark:block" /></a>
     </div>
     <button class="md:hidden" id="menu-toggler"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button>
     <nav class="hidden md:flex bg-inherit z-50 text-inherit gap-5">
-        <a href="{% url 'landingpage' %}">Home</a>
+        <a href="#home">Home</a>
         <a href="#about-us">About</a>
         <a href="#trending">Trending</a>
         <a href="#features">Features</a>
@@ -22,25 +22,25 @@
         </span>
         <div class="hidden md:flex gap-5 items-center justify-center">
             <a href="{%url 'login' %}" class="text-inherit">Login</a>
-            <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+            <a href="{% url 'register' %}" class="primary-btn-sm">Sign Up</a>
         </div>
     </div>
-    <nav class="hidden md:hidden gap-10 menu flex flex-col w-full absolute left-0 top-20 p-8 bg-light z-50 text-center text-primary"
-        id="menu">
+    <nav class="mobile-nav hidden" id="menu">
         <a href="{% url 'landingpage' %}">Home</a>
         <a href="#about-us">About</a>
         <a href="#trending">Trending</a>
         <a href="#features">Features</a>
         <a href="#contact">Contact Us</a>
         <div class="flex gap-5 items-center justify-center">
-            <a href="{%url 'login' %}" class="text-primary">Login</a>
-            <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+            <a href="{%url 'login' %}" class="text-primary dark:text-light">Login</a>
+            <a href="{% url 'register' %}" class="primary-btn-sm">Sign Up</a>
         </div>
     </nav>
 </div>
 <main class="pt-20">
     <section
-        class="min-h-screen grid md:grid-cols-2 relative p-2 relative items-center overflow-hidden dark:bg-black dark:text-light">
+        class="min-h-screen grid md:grid-cols-2 p-2 relative items-center overflow-hidden dark:bg-black dark:text-light"
+        id="home">
         <div class="p-4 flex flex-col gap-5 z-10">
             <h1 class="text-6xl md:text-7xl font-bold dark:text-inherit">Discover the buzz among <span
                     class="text-accent">College
@@ -48,15 +48,15 @@
             </h1>
             <p class="z-10 dark:text-inherit">Upload, Interact and Watch college students display their true talents on
                 Collywood</p>
-            <a href="{% url 'homepage' %}" class="px-6 py-2 bg-accent rounded-sm text-light w-fit z-10">Start
+            <a href="{% url 'homepage' %}" class="primary-btn-lg w-fit">Start
                 Watching</a>
         </div>
         <div class="z-10">
             <img src="{% static 'images/landingpage.png' %}" alt="welcome to collywood" />
         </div>
-        <div class="h-[2000px] w-64 absolute bg-box opacity-10 rotate-[37.46deg] absolute -top-[50%] left-[20%]">
+        <div class="h-[2000px] w-64 absolute bg-box opacity-10 rotate-[37.46deg] -top-[50%] left-[20%]">
         </div>
-        <div class="h-[2000px] w-64 absolute bg-box opacity-10 rotate-[37.46deg] absolute -top-[50%] left-[37%]">
+        <div class="h-[2000px] w-64 absolute bg-box opacity-10 rotate-[37.46deg] -top-[50%] left-[37%]">
         </div>
     </section>
     <section class="py-36 bg-[#CFDAE9] opacity-100 relative overflow-hidden dark:bg-black text-primary dark:text-light"
@@ -71,7 +71,7 @@
                     their creativity by giving them
                     the opportunity to upload their short videos and also watch movies while adhering to time time
                     management.</p>
-                <a class="text-light bg-accent px-8 py-2 rounded-sm w-fit mx-auto" href="{% url 'register' %}">Join Us
+                <a class="primary-btn-lg w-fit mx-auto" href="{% url 'register' %}">Join Us
                 </a>
             </div>
         </div>
@@ -102,7 +102,7 @@
         <div class="h-[2000px] w-64 absolute z-10 bg-box opacity-10 rotate-45 -top-[80%] left-[49%]">
         </div>
     </section>
-    <section class="py-36 relative overflow-hidden px-4 md:px-32 bg-[#CFDAE9] dark:bg-black dark:text-light"
+    <section class="py-36 relative overflow-hidden px-4 md:px-32 bg-[#CFDAE9] dark:bg-black dark:text-light text-center"
         id="features">
         <h2 class="font-bold text-3xl text-primary dark:text-inherit text-center">Our Featues</h2>
         <div
