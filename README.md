@@ -68,6 +68,7 @@ DEBUG=False
 ## How to use
 
 - Start up the server
+- It is advisable to clone the development branch if running on a local server
 - Watch videos by selecting a video on the homepage
 - React to videos (like, comment, dislike)
 - Create account to upload videos
