@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .primary-btn-sm{
+        @apply py-2 px-7 text-light rounded-sm bg-accent;
+    }
+
+    .primary-btn-lg{
+        @apply py-4 px-8 bg-accent rounded-sm text-light;
+    }
+
+    .secondary-btn-lg{
+        @apply py-4 px-8 border-2 border-accent rounded-sm text-light;
+    }
+
+    .app-bar{
+        @apply fixed z-50 top-0 w-screen flex bg-light dark:bg-black text-primary dark:text-light justify-between py-2 px-4 md:pr-10 md:pl-28 items-center shadow-sm gap-5;
+    }
+
+    .content{
+        @apply fixed w-full md:w-auto md:sticky bottom-0 md:left-0 md:top-0 flex md:flex-col bg-light dark:bg-black dark:text-light md:col-span-1 z-40 p-4 md:pt-28 items-center;
+    }
+    .side-nav-item{
+        @apply flex gap-2 items-center justify-between md:w-full;
+    }
+    .mobile-nav{
+        @apply md:hidden gap-10 dark:bg-black dark:text-light flex flex-col w-full absolute left-0 top-20 p-8 bg-light z-50 text-center text-primary;
+    }
+    .input-field{
+        @apply rounded-lg block w-full p-2 border text-black;
+    }
+}
+
+html {
+    font-family: 'Exo', sans-serif !important;
+    font-size: 16px;
+}
+
+.banner-heading {
+    font-family: 'Great Vibes', cursive;
+}
+
+.banner-overlay{
+    background: radial-gradient(64.86% 64.86% at 83.72% 67.7%, rgba(131, 102, 102, 0) 39.58%, rgba(3, 0, 0, 0.6) 100%);
+}
+
+.background{
+    background-image: url("../images/loginbg.jpg") !important;
+    background-size: cover;
+}

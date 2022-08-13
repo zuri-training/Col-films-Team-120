@@ -75,17 +75,23 @@ class Like(models.Model):
     # Like and dislike
 
     user = models.ForeignKey(Member, verbose_name=_(
-        "User"), on_delete=models.CASCADE, related_name="user")
+        "User"), on_delete=models.CASCADE, related_name="likes")
     video = models.ForeignKey(Video, verbose_name=_(
         "Video"), on_delete=models.CASCADE, related_name="likes")
-    liked = models.BooleanField(_("Liked"), null=True, blank=True)
+    liked = models.BooleanField(_("Liked"), default=False)
 
     class Meta:
         unique_together = ('user', 'video',)
 
     def __str__(self):
         if self.liked:
-            return self.user.id
+            return "{} liked {}".format(self.user, self.video)
+        else:
+            return "{} disliked {}".format(self.user, self.video)
+
+    def save(self, *args, **kwargs):
+        self.liked = not self.liked
+        return super(Like, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):

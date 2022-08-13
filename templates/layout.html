@@ -2,13 +2,13 @@
 {% load static %}
 {% block content %}
 
-<div
-    class="fixed z-50 top-0 w-screen flex bg-light dark:bg-black text-primary dark:text-light justify-between py-2 px-4 md:pr-10 md:pl-28 items-center shadow-sm gap-5">
+<div class="app-bar">
     <div class="text-inherit md:fixed left-0 md:p-6 hidden md:block" id="menu-text-toggler"><i
             class="fa fa-th-large fa-2x" aria-hidden="true"></i></div>
     <div>
-        <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" />
-        <img src="{%static 'logo-dark.png' %}" alt="collywood" class="hidden dark:block" />
+        <a href="{% url 'landingpage' %}"> <img src="{%static 'logo.png' %}" alt="collywood" class="dark:hidden" /></a>
+        <a href="{% url 'landingpage' %}"><img src="{%static 'logo-dark.png' %}" alt="collywood"
+                class="hidden dark:block" /></a>
     </div>
     <div>
         <div class="flex gap-5 items-center">
@@ -19,8 +19,8 @@
             <a href="{% url 'profile' %}"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
             {% else %}
             <div class="flex gap-5 items-center">
-                <a href="{%url 'login' %}" class="">Login</a>
-                <a href="{% url 'register' %}" class="py-2 px-7 text-light rounded-sm bg-accent">Sign Up</a>
+                <a href="{%url 'login' %}" class="dark:text-light">Login</a>
+                <a href="{% url 'register' %}" class="primary-btn-sm">Sign Up</a>
             </div>
             {% endif %}
         </div>
@@ -30,16 +30,13 @@
 
 <div class="container-lg w-full mx-auto">
     <div class="md:flex">
-        <div
-            class="fixed z-50 w-full md:w-auto md:sticky bottom-0 md:left-0 md:top-0 md:none flex md:flex-col bg-light dark:bg-black dark:text-light md:col-span-1 z-40 p-4 md:pt-28 items-center">
+        <div class="content">
             <div class="flex md:flex-col justify-around items-center w-full md:gap-5">
-                <a href="{% url 'homepage' %}" class="flex gap-2 items-center justify-between md:w-full"><img
-                        src="{% static 'images/home-2.png' %}" alt="Homepage">&nbsp;<span
-                        class="menu-text hidden pr-4">Homepage</span> &nbsp;&nbsp;</a>
-                <a href="{% url 'profile' %}" class="flex md:w-full items-center justify-between gap-2"><img
-                        src="{% static 'images/video-octagon.png' %}" alt="your profile"><span
-                        class="menu-text hidden">Profile</span>&nbsp;</a>
-                <a href="{% url 'upload-video' %}" class="flex gap-2 md:w-full items-center justify-between"><img
+                <a href="{% url 'homepage' %}" class="side-nav-item"><img src="{% static 'images/home-2.png' %}"
+                        alt="Homepage">&nbsp;<span class="menu-text hidden pr-4">Homepage</span> &nbsp;&nbsp;</a>
+                <a href="{% url 'profile' %}" class="side-nav-item"><img src="{% static 'images/video-octagon.png' %}"
+                        alt="your profile"><span class="menu-text hidden">Profile</span>&nbsp;</a>
+                <a href="{% url 'upload-video' %}" class="side-nav-item"><img
                         src="{% static 'images/upload-video.png' %}" alt="upload videos">&nbsp;<span
                         class="menu-text hidden">Upload Video</span> &nbsp;</a>
             </div>

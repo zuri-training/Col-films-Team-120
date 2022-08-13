@@ -6,40 +6,39 @@
 
     <h2 class="p-4 text-primary text-3xl">Upload video</h2>
     <hr class="text-primary mb-8" />
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center dark:text-light">
         <form method="post" class="flex flex-col gap-5" id="new-video" enctype="multipart/form-data">
             <p id="success" class="text-center text-light fixed top-0 rounded-md p-2 text-small"></p>
             {% csrf_token %}
             <input type="hidden" value="{{ request.user.id }}" name="author" />
             <div class="">
                 <label for="id_title">Title: </label>
-                <input type="text" name="title" maxlength="50" required="" id="id_title"
-                    class="w-full block border p-2">
+                <input type="text" name="title" maxlength="50" required="" id="id_title" class="input-field">
                 <p class="text-xs text-red-700" id="err_title">
                     <p>
             </div>
             <div class="">
                 <label for="id_description">Description:</label>
                 <textarea name="description" cols="40" rows="10" required="" id="id_description"
-                    class="w-full block border p-2"></textarea>
+                    class="input-field"></textarea>
                 <p class="text-xs text-red-700" id="err_description">
                     <p>
             </div>
             <div class="">
                 <label for="id_video_img">Cover Image:</label>
-                <input type="file" name="video_img" id="id_video_img" class="w-full block border p-2">
+                <input type="file" name="video_img" id="id_video_img" class="input-field text-light">
                 <p class="text-xs text-red-700" id="err_video_img">
                     <p>
             </div>
             <div class="">
                 <label for="id_video_file">Video:</label>
-                <input type="file" name="video_file" id="id_video_file" class="w-full block border p-2">
+                <input type="file" name="video_file" id="id_video_file" class="input-field text-light">
                 <p class="text-xs text-red-700" id="err_video_file">
                     <p>
             </div>
             <div class="">
                 <label for="id_category">Categories:</label>
-                <select name="category" required id="id_category" class="w-full block border p-2 ">
+                <select name="category" required id="id_category" class="input-field ">
                     <option value="" selected="">---------</option>
                     {% for category in categories %}
                     <option value="{{ category.id }}">{{ category.title }}</option>
@@ -48,7 +47,7 @@
                 <p class="text-xs text-red-700" id="err_category">
                     <p>
             </div>
-            <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Upload
+            <button type="submit" class="primary-btn-sm w-fit mx-auto">Upload
                 Video</button>
         </form>
         <video src="" class="hidden" id="vid"></video>
