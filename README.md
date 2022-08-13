@@ -6,7 +6,7 @@
 
 A web application that allows college students to upload, watch and share short videos from their comfort while enforcing time management to enable a productive lifestyle
 
-This app was built using the Django framework
+#### Tech Stack - Python/Django
 
 ## Table of Contents
 
@@ -34,14 +34,45 @@ This app was built using the Django framework
     python manage.py runserver
 ```
 
+Two databases are set-up comment out the one not desired, by default sqlite is enabled
+update in settings.py
+
+###### IT IS RECOMMENDED TO USE POSTGRES IN PRODUCTION
+
+```python
+ DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'collywood',
+        'USER': 'collywood-admin',
+        'PASSWORD': 'collywood-admin@321',
+        'HOST': 'db',
+        'PORT': 5432
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db',
+    }
+}
+```
+
+if running on a production server update settings.py. set Debug=False
+
+```python
+DEBUG=False
+```
+
 ## How to use
 
 - Start up the server
 - Watch videos by selecting a video on the homepage
 - React to videos (like, comment, dislike)
 - Create account to upload videos
-- Schedule a video to watch later
-- Set timer to improve productivity
+- Login with account
+- The static files are served from the static folder in the base directory
 
 # Resources
 
@@ -55,17 +86,17 @@ This app was built using the Django framework
 
 ## Contributors
 
+There is a contributions folder attached to the developement branch which is our default branch, there you will find the contributions readme of each of our team members
+
 - [Olomi Gift - Designer](https://www.github.com/mehetabelgift)
 - [Ogieleguea Hillary - Developer](https://www.github.com/hillarywebb-coder)
 - [Anyiam David - Designer](https://www.github.com/dravidTML)
-- [Mikaheel Azeez Babatunde - Developer](https://www.github.com/Olamide1992)
 - [Chisom Kalu - Designer](https://www.github.com/chisomkalu)
 - [Abibat Shittu - Designer](https://www.github.com/abibatshittu)
 - [Abigail Addo - Designer](https://www.github.com/asaddo444)
 - [Favour Nwachukwu - Designer](https://www.github.com/billyfaychi)
 - [Ladejobi Moses - Designer](https://www.github.com/mola71)
 - [Bolaji Jimon Adigun - Developer](https://www.github.com/bolajiomo99)
-- [Benard Kiprop - Developer](https://www.github.com/bena83)
 - [Tomilayo Abimbola - Designer](https://www.github.com/tomilayoA)
 - [Gideon Akinola - Designer](https://www.github.com/blvckcoco)
 - [Olawuwo Ajibola - Designer](https://www.github.com/lawuwoabeeb)
