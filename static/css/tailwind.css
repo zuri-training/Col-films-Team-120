@@ -28,8 +28,17 @@
     .mobile-nav{
         @apply md:hidden gap-10 dark:bg-black dark:text-light flex flex-col w-full absolute left-0 top-20 p-8 bg-light z-50 text-center text-primary;
     }
-    .input-field{
+
+    input, textarea, select{
         @apply rounded-lg block w-full p-2 border text-black;
+    }
+
+    .helptext{
+        @apply hidden;
+    }
+
+    .done{
+        @apply text-xs
     }
 }
 

@@ -6,6 +6,8 @@
 
 A web application that allows college students to upload, watch and share short videos from their comfort while enforcing time management to enable a productive lifestyle
 
+## Live server: [https://collywood.herokuapp.com/]("https://collywood.herokuapp.com/")
+
 #### Tech Stack - Python/Django
 
 ## Table of Contents
@@ -68,6 +70,7 @@ DEBUG=False
 ## How to use
 
 - Start up the server
+- It is advisable to clone the development branch if running on a local server
 - Watch videos by selecting a video on the homepage
 - React to videos (like, comment, dislike)
 - Create account to upload videos
