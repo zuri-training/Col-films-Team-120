@@ -1,0 +1,1 @@
+web: gunicorn collywood.wsgi --log-file -

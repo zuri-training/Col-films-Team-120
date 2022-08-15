@@ -45,21 +45,19 @@ def videoDataView(request):
 
 @login_required
 def uploadVideoView(request):
+    vidform = VideoForm()
     if(request.method == "POST"):
-        form = VideoForm(request.POST, request.FILES)
+        vidform = VideoForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            form.save()
+        if vidform.is_valid():
+            vidform.save()
             return redirect("/accounts/profile")
-        else:
-            formData = form.errors.get_json_data()
-            for err in formData:
-                print(formData[err][0]["message"])
-            return JsonResponse(formData)
-    else:
-        vidform = VideoForm()
-        categories = Category.objects.all()
-        return render(request, "video/upload-video.html", {"form": vidform, "categories": categories})
+        # else:
+        #     formData = form.errors.get_json_data()
+        #     for err in formData:
+        #         print(formData[err][0]["message"])
+        #     return JsonResponse(formData)
+    return render(request, "video/upload-video.html", {"form": vidform})
 
 
 @login_required
