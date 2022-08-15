@@ -34,11 +34,11 @@
     }
 
     .errorlist {
-        @apply text-xs text-red-500
+        @apply text-xs text-red-500;
     }
 
     .helptext{
-        @apply hidden
+        @apply hidden;
     }
 }
 

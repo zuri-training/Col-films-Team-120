@@ -86,7 +86,6 @@
     $("document").ready(() => {
 
         setInterval(() => {
-            $("#comments").empty()
             $.ajax({
                 url: "{% url 'video-data' %}",
                 type: "GET",
@@ -99,6 +98,7 @@
                     $("#num-comments").html(json.numComments)
                     if (json.numComments) {
                         comments = JSON.parse(json.comments)
+                        $("#comments").empty()
                         for (comment in comments) {
                             //console.log(comments)
                             $("#comments").append(
@@ -118,7 +118,7 @@
                     //
                 }
             })
-        }, 5000);
+        }, 500);
 
         $("#like").on("click", () => {
             $.ajax({

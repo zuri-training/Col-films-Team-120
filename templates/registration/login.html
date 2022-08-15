@@ -12,19 +12,8 @@
         <h2 class="text-center pb-8 text-primary dark:text-inherit font-bold text-3xl">Welcome Back</h2>
         <form method="post" action="." class="w-full flex flex-col gap-5">
             {% csrf_token %}
-            <div class="w-full">
-
-                <label for=" id_username">Student Email</label>
-                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username"
-                    maxlength="254" required id="id_username" class="input-field">
-            </div>
-            <div class="w-full">
-
-                <label for="id_password">Password</label>
-                <input type="password" name="password" autocomplete="current-password" required id="id_password"
-                    class="input-field">
-            </div>
-            <button type="submit" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto">Log In</button>
+            {{ form.as_div }}
+            <input type="submit" value="login" class="w-full p-2 text-light bg-accent rounded-md md:w-2/5 mx-auto" />
         </form>
         <p class="text-primary py-4 text-small dark:text-inherit">Don't have an account? <span class="text-accent"><a
                     href="{% url 'register' %}">Sign up instead</a></span></p>
