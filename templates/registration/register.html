@@ -14,7 +14,7 @@
             <p id="success" class="text-center text-light rounded-md p-2 text-small"></p>
             {% csrf_token %}
             {{ form.as_div }}
-            <button class="primary-btn-lg w-fit mx-auto">Submit</button>
+            <input type="submit" value="Register" class="primary-btn-lg w-fit mx-auto">
         </form>
         <p class="text-primary dark:text-inherit py-4 text-small">Already have an account? <span class="text-accent"><a
                     href="{% url 'login' %}">Sign in instead</a></span></p>
