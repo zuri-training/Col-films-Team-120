@@ -33,12 +33,12 @@
         @apply rounded-lg block w-full p-2 border text-black;
     }
 
-    .errorlist {
-        @apply text-xs text-red-500;
-    }
-
     .helptext{
         @apply hidden;
+    }
+
+    .done{
+        @apply text-xs
     }
 }
 

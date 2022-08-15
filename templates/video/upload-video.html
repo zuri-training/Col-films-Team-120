@@ -6,7 +6,7 @@
 
     <h2 class="p-4 text-primary text-3xl">Upload video</h2>
     <hr class="text-primary mb-8" />
-    <div class="flex justify-center items-center dark:text-light">
+    <div class="flex justify-center items-center dark:text-light text-xs text-red-500">
         <form method="post" class="flex flex-col gap-5" id="new-video" enctype="multipart/form-data">
             <p id="success" class="text-center text-light fixed top-0 rounded-md p-2 text-small"></p>
             {% csrf_token %}
