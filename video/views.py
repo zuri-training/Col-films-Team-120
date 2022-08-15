@@ -6,6 +6,7 @@ from .forms import LikeForm, VideoForm
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.core import serializers
+from django.urls import reverse
 
 
 def landingView(request):
@@ -31,8 +32,8 @@ def videoView(request, video_slug):
 def videoDataView(request):
     video = Video.objects.get(id=request.GET["video"])
     numReactions = video.likes.all().filter(liked=True).count()
-    numComments = video.comments.all().count()
     comments = video.comments.filter(video=video).prefetch_related('user')
+    numComments = comments.count()
     userLiked = video.likes.all().filter(user=request.user)
     res = {
         "reactions": numReactions,
@@ -45,13 +46,13 @@ def videoDataView(request):
 
 @login_required
 def uploadVideoView(request):
-    vidform = VideoForm()
+    vidform = VideoForm(initial={"author": request.user.id})
     if(request.method == "POST"):
         vidform = VideoForm(request.POST, request.FILES)
 
         if vidform.is_valid():
             vidform.save()
-            return redirect("/accounts/profile")
+            return redirect(reverse("profile"))
         # else:
         #     formData = form.errors.get_json_data()
         #     for err in formData:
